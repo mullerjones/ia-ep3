@@ -145,8 +145,13 @@ class BlackjackMDP(util.MDP):
                     newState = (state[0]+self.valores_cartas[i], None, newDeck)
                     if newState[0] > self.limiar:
                         newState = (newState[0], None, None)
+                    if numCartas(newDeck) == 0:
+                        newDeck = None
+                        newState = (newState[0], newState[1], newDeck)
+                        reward = newState[0]
                     tup = (newState, prob, reward)
                     listaSaida.append(tup)
+                    a = 5
             return listaSaida
 
         if(action == 'Espiar'):
