@@ -212,7 +212,9 @@ class ValueIteration(util.MDPAlgorithm):
         # Implement the main loop of Asynchronous Value Iteration Here:
         # BEGIN_YOUR_CODE
         acabou = False
+        numIters = 0
         while not acabou:
+            numIters += 1
             Vlinha = {}
             for estado in mdp.states:
                 maior = 0
@@ -233,7 +235,7 @@ class ValueIteration(util.MDPAlgorithm):
 
         # Extract the optimal policy now
         pi = computeOptimalPolicy(mdp, V)
-        # print("ValueIteration: %d iterations" % numIters)
+        #print("ValueIteration: %d iterations" % numIters)
         self.pi = pi
         self.V = V
 
@@ -314,7 +316,15 @@ class QLearningAlgorithm(util.RLAlgorithm):
          HINT: Remember to check if s is a terminal state and s' None.
         """
         # BEGIN_YOUR_CODE
-        raise Exception("Not implemented yet")
+        maxQ = 0
+        if newState != None:
+            for acao in self.actions(newState):
+                possQ = self.getQ(newState, acao)
+                if possQ > maxQ:
+                    maxQ = possQ
+        diff = reward + self.discount * maxQ - self.getQ(state, action)
+        for feature, value in self.featureExtractor(state, action):
+            self.weights[feature] += self.getStepSize() * diff * value
         # END_YOUR_CODE
 
 
@@ -343,5 +353,22 @@ def blackjackFeatureExtractor(state, action):
     (See identityFeatureExtractor() above for a simple example.)
     """
     # BEGIN_YOUR_CODE
-    raise Exception("Not implemented yet")
+    lista = []
+    tup = []
+    for each in state[2]:
+        if state != 0:
+            tup.append(1)
+        else:
+            tup.append(0)
+    return lista
+    #raise Exception("Not implemented yet")
     # END_YOUR_CODE
+
+def devolveZero():
+    return 0
+algo = QLearningAlgorithm(actions=MDP1.actions, discount=MDP1.discount(), featureExtractor=blackjackFeatureExtractor)
+saida1 = util.simulate(mdp=MDP1, rl=algo, numTrials=30000)
+algo.explorationProb = 0.0
+saida2 = util.simulate(mdp=largeMDP, rl=algo, numTrials=30000)
+
+print("terminou")
