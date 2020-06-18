@@ -121,7 +121,6 @@ def run_tests():
             total_tests += 1
             with Timeout(10):
                 if  gold==mdp.succAndProbReward(state, action):
-                    print(gold)
                     test_results += 1
         file_results.write("Modeling MDPs:\t{0}/{1} correct\n".format(test_results, total_tests))
         global_results += test_results

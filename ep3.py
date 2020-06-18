@@ -13,13 +13,15 @@
   ENTENDO QUE EPS SEM ASSINATURA NAO SERAO CORRIGIDOS E,
   AINDA ASSIM, PODERAO SER PUNIDOS POR DESONESTIDADE ACADEMICA.
 
-  Nome :
-  NUSP :
+  Nome : Alexandre Muller Jones
+  NUSP : 8038149
 
   Referencias: Com excecao das rotinas fornecidas no enunciado
   e em sala de aula, caso voce tenha utilizado alguma referencia,
   liste-as abaixo para que o seu programa nao seja considerado
   plagio ou irregular.
+
+
 
   Exemplo:
   - O algoritmo Quicksort foi baseado em:
@@ -124,7 +126,7 @@ class BlackjackMDP(util.MDP):
             return [(newState, prob, reward)]
 
         if action == 'Pegar':
-            if(state[1] != None):
+            if state[1] != None:
                 # Pega o que espiou
                 index = state[1]
                 deck = removeCarta(deck, index)
@@ -132,7 +134,7 @@ class BlackjackMDP(util.MDP):
                 prob = 1
                 reward = 0
                 if newState[0] > self.limiar:
-                    tup = ((newState[0], None, None) ,1 ,0)
+                    tup = ((newState[0], None, None), 1, 0)
                 else:
                     tup = (newState, prob, reward)
                 return [tup]
@@ -151,10 +153,9 @@ class BlackjackMDP(util.MDP):
                         reward = newState[0]
                     tup = (newState, prob, reward)
                     listaSaida.append(tup)
-                    a = 5
             return listaSaida
 
-        if(action == 'Espiar'):
+        if action == 'Espiar':
             indicesEspiaveis = possiveisEspiadas(deck)
 
             for each in indicesEspiaveis:
@@ -210,7 +211,24 @@ class ValueIteration(util.MDPAlgorithm):
         V = defaultdict(float)  # state -> value of state
         # Implement the main loop of Asynchronous Value Iteration Here:
         # BEGIN_YOUR_CODE
-        raise Exception("Not implemented yet")
+        acabou = False
+        while not acabou:
+            Vlinha = {}
+            for estado in mdp.states:
+                maior = 0
+                for acao in mdp.actions(estado):
+                    atual = 0
+                    atual = computeQ(mdp, V, estado, acao)
+                    if atual > maior:
+                        maior = atual
+                Vlinha[estado] = maior
+
+            acabou = True
+            for key in Vlinha.keys():
+                if abs(Vlinha[key] - V[key]) > epsilon:
+                    acabou = False
+                    break
+            V = Vlinha
         # END_YOUR_CODE
 
         # Extract the optimal policy now
@@ -235,7 +253,7 @@ def geraMDPxereta():
     optimal action for at least 10% of the states.
     """
     # BEGIN_YOUR_CODE
-    raise Exception("Not implemented yet")
+    return BlackjackMDP(valores_cartas=[1, 20], multiplicidade=2, limiar=20, custo_espiada=1)
     # END_YOUR_CODE
 
 
