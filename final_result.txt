@@ -1,0 +1,46 @@
+******************************
+Code quality:
+------------------------------
+Code grade: 7.04/10.0	(Great code quality)
+------------------------------
+Standards deviation:
+statement:	189
+info:	0
+convention:	50
+refactor:	2
+warning:	4
+error:	0
+fatal:	0
+------------------------------
+Deviation description:
+redefined-outer-name:	3
+too-many-locals:	1
+invalid-name:	46
+consider-using-enumerate:	1
+singleton-comparison:	1
+arguments-differ:	1
+consider-iterating-dictionary:	1
+too-few-public-methods:	1
+missing-function-docstring:	1
+******************************
+Tests:
+------------------------------
+Parte01-01 Modeling MDPs:
+Modeling MDPs:	2/2 correct
+Test concluded without errors
+Grade in the Test01: 10.0/10.0
+------------------------------
+Part02-01 ValueIteration::
+ValueIteration:	1/1 correct
+Test concluded without errors
+Grade in the Test02-01: 10.0/10.0
+------------------------------
+Part02-02 Peeking MDP:
+Peeking MDP:	1/1 correct
+Test concluded without errors
+Grade in the Test02-02: 10.0/10.0
+------------------------------
+Part03-01 QLearningAlgorithm:
+QLearningAlgorithm:	4/4 correct
+Test concluded without errors
+Grade in the Test03-01: 10.0/10.0
